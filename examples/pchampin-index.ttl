@@ -1,0 +1,226 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cert: <http://www.w3.org/ns/auth/cert#> .
+
+@base <http://champin.net/> .
+
+<> a foaf:PersonalProfileDocument ;
+    foaf:primaryTopic <#pa> ;
+    foaf:maker <#pa> .
+
+<#pa> a foaf:Person ;
+    foaf:name "Pierre-Antoine Champin" ;
+    foaf:title "Dr" ;
+    foaf:givenname "Pierre-Antoine" ;
+    foaf:surname "Champin" ;
+    foaf:nickname "pa" ;
+    foaf:homepage <http://champin.net/> ;
+    foaf:img <http://champin.net/face> ;
+    foaf:workplaceHomepage <http://liris.cnrs.fr/> ;
+    foaf:workInfoHomepage <http://liris.cnrs.fr/membres/?idn=pchampin> ;
+    foaf:publications <https://liris.cnrs.fr/membres/?idn=pchampin&onglet=publis> ;
+    foaf:based_near <http://dbpedia.org/resource/Lyon> ;
+
+    foaf:knows
+        <http://zimmer.aprilfoolsreview.com/antoine#me>,
+        <http://harth.org/andreas/foaf#ah>,
+        <http://data.semanticweb.org/person/alexandre-passant>,
+        <http://bblfish.net/people/henry/card#me>,
+        <http://liris.cnrs.fr/~mmrissa/foaf.rdf#mm>,
+        <http://www.eurecom.fr/~troncy/troncyr-foaf.rdf#me>,
+        <http://ns.inria.fr/fabien.gandon/foaf.rdf#me>,
+        <http://www.ibiblio.org/hhalpin/foaf.rdf#me>,
+        <http://richard.cyganiak.de/foaf.rdf#cygri>,
+        <http://olafhartig.de/foaf.rdf#olaf>,
+        <http://www.ivan-herman.net/foaf#me>,
+        <http://id.ecs.soton.ac.uk/person/21>,
+        <http://tomayac.com/thomas_steiner.rdf#me>,
+        <http://melvincarvalho.com/#me>,
+        _:acordier,
+        _:amille,
+        _:bhabert,
+        _:bsmyth,
+        _:yprie,
+        _:jdavid;
+
+    foaf:holdsAccount
+        <http://delicious.com/pierre.antoine.champin>,
+        <http://flickr.com/people/pa-champin>,
+        <http://twitter.com/pchampin>,
+        <http://github.com/pchampin>,
+        <http://stackoverflow.com/users/1235487/pierre-antoine>,
+        <http://www.slideshare.net/pchampin>,
+        <http://identi.ca/pchampin>,
+        <http://www.dailymotion.com/pchampin>,
+        <http://www.faviki.com/person/pchampin>,
+        <http://www.linkedin.com/profile?viewProfile=&amp;key=38054031>,
+        <http://answers.semanticweb.com/users/595/pchampin>,
+        <http://getsatisfaction.com/people/pa_1804794>;
+
+    foaf:currentProject
+        <http://advene.org/advene-doap.rdf#advene>,
+        <http://champin.net/t4r/doap.rdf#t4r>,
+        <http://champin.net/2009/ktbs#it>;
+
+    foaf:maker
+        <http://linkeddata.few.vu.nl/slideshare/yprie/une-introduction-au-web-de-donnes> ;
+
+
+    owl:sameas
+        <http://citeseer.rkbexplorer.com/id/resource-CSP49454-f43173812abf92a298da68fed8501615>,
+        <http://dblp.rkbexplorer.com/id/people-bfccbf0775abcfe85caf34091774d321-79b7b154f8a64d2ff80fc7d23105ea64>,
+        <http://data.semanticweb.org/person/pierre-antoine-champin>,
+        <https://liris.cnrs.fr/membres/?idn=pchampin#me>,
+        # older deprecated URIs
+        <http://champin.net/pa>,
+        <http://liris.cnrs.fr/~pchampin/foaf.rdf#pa>;
+
+    cert:key [
+        a cert:RSAPublicKey ;
+        cert:modulus "ad7895a748b09d70638e953e83151b339fe16bac8f5cb6868cdb54e4f101fb6faeb112f730285978e0042acd9b870eba4f3f325ef2a412bd34799bc0694f5a186815aa091932b174cb9e9301529644839de51562925c58a69d30c2082c4b521100edb999e6f03159a550f7c4eabe9295f27f0111cd4507dff4ecd47239f4676516e26a159f55968c6e5fe9262be66a404eb8cf99edcec294eb0f5352c4afe9c2b7ebffc179b7c89604f32bed3d9ccc43df8af03be1e17924f9377c27a4ff3a7672a6d20a07a82de5e6a8d58fb435c9ca278d5479cf1cd8d1eae322f6bf917d0793df4070a1638a2eca021769b8260836991bab14ed9873453dfcfd0d63c9075d"^^xsd:hexBinary ;
+        cert:exponent 65537
+    ];
+
+.
+
+#
+#
+# bnodes descriptions (or non LD URIs)
+#
+#
+
+# persons
+
+_:amille a foaf:Person ;
+    foaf:name "Alain Mille" ;
+    foaf:homepage <http://liris.cnrs.fr/amille/> ;
+.
+
+_:acordier a foaf:Person ;
+    foaf:name "Amélie Cordier" ;
+    foaf:homepage <http://liris.cnrs.fr/amelie.cordier/> ;
+.
+
+_:bhabert a foaf:Person ;
+    foaf:name "Benoît Habert" ;
+    foaf:workInfoHomepage <http://www.ens-lyon.eu/annuaire/m-habert-benoit-26303.kjsp> ;
+.
+
+_:bsmyth a foaf:Person ;
+    foaf:name "Barry Smyth" ;
+    foaf:homepage <http://dejavu3.ucd.ie/> ;
+.
+
+_:yprie a foaf:Person ;
+    foaf:name "Yannick Prié" ;
+    foaf:homepage <http://yannickprie.net/> ;
+    foaf:currentProject <http://advene.org/advene-doap.rdf#advene> ;
+.
+
+_:jdavid a foaf:Person ;
+    foaf:name "Jérôme David" ;
+    foaf:homepage <http://exmo.inrialpes.fr/~jdavid/> ;
+.
+
+
+# profiles
+
+<https://keybase.io/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Keybase account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <https://keybase.io/> ;
+    foaf:depiction <https://keybase.io/images/logo_no_text.png> .
+<http://flickr.com/people/pa-champin>
+    rdfs:label "Pierre-Antoine Champin's Flickr account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pa-champin" ;
+    foaf:accountServiceHomepage <http://flickr.com/> ;
+    foaf:depiction <http://flickr.com//apple-touch-icon.png> .
+<http://twitter.com/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Twitter account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://twitter.com/> ;
+    foaf:depiction <http://twitter.com/favicon.ico> .
+<http://www.slideshare.net/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Slideshare account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://www.slideshare.net/> ;
+    foaf:depiction <http://www.slideshare.net/favicon.ico> .
+<http://identi.ca/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Identi.ca account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://identi.ca/> ;
+    foaf:depiction <http://identi.ca/favicon.ico> .
+<http://www.dailymotion.com/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Dailymotion account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://www.dailymotion.com/> ;
+    foaf:depiction <http://static1.dmcdn.net/images/apple-touch-icon.png> .
+<http://www.faviki.com/person/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Faviki account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://www.faviki.com/> ;
+    foaf:depiction <http://www.faviki.com/favicon.ico> .
+<http://www.linkedin.com/profile?viewProfile=&amp;key=38054031>
+    rdfs:label "Pierre-Antoine Champin's LinkedIn account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "38054031" ;
+    foaf:accountServiceHomepage <http://www.linkedin.com/> ;
+    foaf:depiction <http://www.linkedin.com/favicon.ico> .
+<http://answers.semanticweb.com/users/595/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Semantic Overflow account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://answers.semanticweb.com/> ;
+    foaf:depiction <http://semanticweb.com/blogshare/content/semanticwebcom/images/semanticweb_57x57.png> .
+# <http://diasp.be/people/4d0f51e366ada22e6600000d>
+#     rdfs:label "Pierre-Antoine Champin's Diaspora account" ;
+#     a foaf:OnlineAccount ;
+#     foaf:accountdName "pchampin" ;
+#     foaf:accountServiceHomepage <http://diasp.be/> ;
+#     foaf:depiction <http://diasp.be/favicon.ico> .
+<http://getsatisfaction.com/people/pa_1804794>
+    rdfs:label "Pierre-Antoine Champin's GetSatisfaction account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pa" ;
+    foaf:accountServiceHomepage <http://getsatisfaction.com/> ;
+    foaf:depiction <http://getsatisfaction.com/favicon.ico> .
+<http://careers.stackoverflow.com/users/info/253481>
+    rdfs:label "Pierre-Antoine Champin's Careers 2.0 account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountServiceHomepage <http://http://careers.stackoverflow.com/> ;
+    foaf:depiction <http://careerscdn.sstatic.net/careers/Img/favicon.ico> .
+<http://github.com/pchampin>
+    rdfs:label "Pierre-Antoine Champin's GitHub account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <http://github.com/> ;
+    foaf:depiction <https://github.com/fluidicon.png> .
+<http://stackoverflow.com/users/1235487/pierre-antoine>
+    rdfs:label "Pierre-Antoine Champin's StackOverlfow account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pierre-antoine" ;
+    foaf:accountServiceHomepage <http://stackoverflow.com/> ;
+    foaf:depiction <http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png> .
+<https://www.researchgate.net/profile/Pierre-Antoine_Champin>
+    rdfs:label "Pierre-Antoine Champin's ResearchGate account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "Pierre-Antoine_Champin" ;
+    foaf:accountServiceHomepage <https://www.researchgate.net/> ;
+    foaf:depiction <https://www.researchgate.net/favicon.ico> .
+
+<https://flattr.com/profile/pchampin>
+    rdfs:label "Pierre-Antoine Champin's Flattr account" ;
+    a foaf:OnlineAccount ;
+    foaf:accountdName "pchampin" ;
+    foaf:accountServiceHomepage <https://flattr.com/> ;
+    foaf:depiction <https://flattr.com/_img/icons/ios-icon.png> .
