@@ -1,7 +1,7 @@
 // jshint node: true
 var Promise = require('promise');
 
-exports.jsonld = function(graph, callback) {
+var jsonld = function(graph, callback) {
     return new Promise(function(resolve, reject) {
         callback('[');
         graph.forEachTriple(null, null, null, function(s, p, o) {
@@ -12,7 +12,7 @@ exports.jsonld = function(graph, callback) {
                     '@language': o['@language']
                 };
             }
-            triple = { '@id': s['@id'] };
+            var triple = { '@id': s['@id'] };
             triple[p['@id']] = o;
             callback(JSON.stringify(triple) + ",");
         });
@@ -20,3 +20,19 @@ exports.jsonld = function(graph, callback) {
         resolve();
     });
 };
+exports.jsonld = jsonld;
+
+var register = require('./factory.js').register;
+
+register({
+    contentType: 'application/debug+json',
+    serializer: jsonld
+});
+register({
+    contentType: 'application/application+json',
+    serializer: jsonld
+});
+register({
+    contentType: 'application/json',
+    serializer: jsonld
+});

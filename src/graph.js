@@ -157,3 +157,21 @@ exports.graph = function() {
 
     return that;
 };
+
+exports.copyGraph = function(g1, g2) {
+    return new Promise(function(resolve, reject) {
+        if (g2 === undefined) {
+            g2 = exports.graph();
+        }
+        g1.forEach(null, null, null, g2.addTriple).then(
+            function () { resolve(g2); },
+            reject
+        );
+    });
+};
+
+
+exports.readonlyWrapper = function(g) {
+    // TODO implement this correctly
+    return g;
+};
