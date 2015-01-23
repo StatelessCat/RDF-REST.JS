@@ -14,6 +14,6 @@ var parser = N3.Parser();
 var g = graph();
 
 ntriples.toGraph(rdfStream).then(function (graph) {
-    console.log(graph);
+    //console.log(graph);
     graph.forEachTriple(null, null, null, console.log);
 });

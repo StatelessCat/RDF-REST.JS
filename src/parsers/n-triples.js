@@ -15,27 +15,24 @@ exports.toGraph = function (ntriples) {
             g = graph();
 
         // il faut une promise ici et attendre sa réalisation avant de lancer
-        // le resolve !!!
+        // le resolve !
         parser.parse(ntriples, function (error, triple, prefixes) {
             if (triple) {
                 g.addTriple(iri(triple.subject),
                     iri(triple.predicate), triple.object); // on ajoute un à un les triplets
+            } else {
+                // parsing is done, we can continue
+                if (g) {
+                    resolve(g);
+                } else {
+                    reject(new Error("It broke"));
+                }
             }
             if (error) {
                 console.log(error);
             }
         });
-
-
-        if (g) {
-            console.log("resolve va etre executé");
-            resolve(g);
-        } else {
-            console.log("reject va etre executé");
-            reject(new Error("It broke"));
-        }
     });
-    console.log("inside");
     return a_promise;
 };
 
