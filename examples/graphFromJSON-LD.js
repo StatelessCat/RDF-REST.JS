@@ -1,9 +1,6 @@
 "use strict";
-var jsonld = require('jsonld');
-var N3 = require('n3');
 
-// use the promises API of jsonld
-var promises = jsonld.promises;
+var jsonld = require('../src/parsers/json-ld');
 
 // we define a Json-LD document
 var doc = {
@@ -14,13 +11,6 @@ var doc = {
     "spouse": "http://dbpedia.org/resource/Cynthia_Lennon"
 };
 
-// serialize to RDF
-var promise = promises.toRDF(doc, {format: 'application/nquads'});
-promise.then(function (nquads) {
-    console.log(nquads);
-
-
-}, function (err) {
-    console.log(err);
+jsonld.toGraph(doc).then(function (graph) {
+    graph.forEachTriple(null, null, null, console.log);
 });
-

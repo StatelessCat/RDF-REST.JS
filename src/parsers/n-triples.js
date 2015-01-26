@@ -6,7 +6,7 @@ var graph = require('../graph.js').graph;
 var iri = require('../rdfnode.js').iri;
 
 /**
- * Returns a Promise that is able to serve a graph representation //TODO fixme!
+ * Returns a Promise that is able to serve a graph representation
  * @param ntriples
  */
 exports.toGraph = function (ntriples) {
