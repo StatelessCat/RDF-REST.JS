@@ -1,7 +1,7 @@
 "use strict";
 
 var N3 = require('n3');
-var Promise = require('promise'); //TODO check why the jslinter don't like
+var Promise = require('promise');
 var graph = require('../graph.js').graph;
 var iri = require('../rdfnode.js').iri;
 
@@ -10,13 +10,10 @@ var iri = require('../rdfnode.js').iri;
  * @param ntriples
  */
 exports.toGraph = function (ntriples) {
-    var a_promise = new Promise(function (resolve, reject) {
+    var aPromise = new Promise(function (resolve, reject) {
         var parser = N3.Parser(),
             g = graph();
-
-        // il faut une promise ici et attendre sa réalisation avant de lancer
-        // le resolve !
-        parser.parse(ntriples, function (error, triple, prefixes) {
+        parser.parse(ntriples, function (error, triple) {
             if (triple) {
                 g.addTriple(iri(triple.subject),
                     iri(triple.predicate), triple.object); // on ajoute un à un les triplets
@@ -25,14 +22,14 @@ exports.toGraph = function (ntriples) {
                 if (g) {
                     resolve(g);
                 } else {
-                    reject(new Error("It broke"));
+                    reject(new Error("g is null"));
                 }
             }
             if (error) {
-                console.log(error);
+                reject(new Error("It broke"));
             }
         });
     });
-    return a_promise;
+    return aPromise;
 };
 

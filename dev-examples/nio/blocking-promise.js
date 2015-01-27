@@ -1,7 +1,7 @@
 "use strict";
 
 var fs = require('fs');
-var Promise = require('promise'); //TODO check why the jslinter don't like
+var Promise = require('promise');
 
 var p = new Promise(function (resolve) {
     var i_m_blocking = function () {
@@ -11,5 +11,7 @@ var p = new Promise(function (resolve) {
     resolve(i_m_blocking());
 });
 
-p.then(function (content) { console.log(content); });
+p.then(function (content) {
+    console.log(content);
+});
 console.log("fini");
