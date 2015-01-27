@@ -1,6 +1,6 @@
 "use strict";
 
-var jsonld = require('../src/parsers/json-ld');
+var jsonld = require('../src/parsers/json-ld-adapter');
 
 // we define a Json-LD document
 var doc = {
