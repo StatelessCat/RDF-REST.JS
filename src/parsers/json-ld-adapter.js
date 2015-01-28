@@ -5,26 +5,42 @@ var Promise = require('promise');
 var graph = require('../graph.js').graph;
 var iri = require('../rdfnode.js').iri;
 
-/**
- * Returns a Promise that is able to serve a graph representation
- * @param
- */
-exports.toGraph = function (jsonLd) {
-    return new Promise(function (resolve, reject) {
-        var jsonLdPro = new jsonld.JsonLdProcessor();
+var Parser = function(graph) {
+    if (!(this instanceof Parser)) {
+        return new Parser(graph);
+    }
 
-        jsonLdPro.toRDF(jsonLd).then(function (dataset) {
-            var resultArr = dataset["@default"],
-                g = graph();
+    var that = this;
+    var _txt = "";
+    that.addChunk = function(chunk) {
+        _txt += chunk;
+    };
+    that.finalize = function() {
 
-            resultArr.forEach(function (triple) {
-                g.addTriple(iri(triple.subject.value), iri(triple.predicate.value), triple.object);
+        return new Promise(function (resolve, reject) {
+            var jsonLdPro = new jsonld.JsonLdProcessor();
+
+            jsonLdPro.toRDF(_txt).then(function (dataset) {
+                var resultArr = dataset["@default"],
+                    g = graph();
+
+                resultArr.forEach(function (triple) {
+                    g.addTriple(iri(triple.subject.value),
+                        iri(triple.predicate.value), triple.object);
+                });
+                if (g) {
+                    resolve(g);
+                } else {
+                    reject(g);
+                }
             });
-            if (g) {
-                resolve(g);
-            } else {
-                reject(g);
-            }
         });
-    });
+    };
 };
+
+exports.Parser = Parser;
+
+require('./factory.js').register({
+    contentType: 'application/ld+json',
+    parserMaker: Parser
+});

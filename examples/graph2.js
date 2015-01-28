@@ -8,8 +8,9 @@ var langstring = require('../src/rdfnode.js').langstring;
 var namespace = require('../src/rdfnode.js').namespace;
 var getSerializer = require('../src/serializers/factory.js').getSerializer;
 var getParser = require('../src/parsers/factory.js').getParser;
+var Promise = require('promise');
 
-require('../src/parsers/debug.js'); // ensures that parser is registered
+require('../src/parsers/json-ld-adapter.js'); // ensures that parser is registered
 require('../src/serializers/jsonld.js'); // ensures that serializer is registered
 require('../src/serializers/nt.js'); // ensures that serializer is registered
 
@@ -19,12 +20,12 @@ var me = iri('http://champin.net/#pa');
 var ns = namespace('http://ex.co/vocab#');
 var g = graph();
 g.addTriple(me, ns('type'), ns('Person'));
-g.addTriple(me, ns('label'), "Pierre-Antoine Champin"); 
+g.addTriple(me, ns('label'), "Pierre-Antoine Champin");
 
-/******** serialize graph as debug+json, parse it back, and serialize it to NT ********/
+/******** serialize graph as json-ld, parse it back, and serialize it to NT ********/
 
 var p = getParser({
-    contentType:'application/debug+json',
+    contentType:'application/ld+json',
     graph: graph()
 });
 var serializeToJson = getSerializer({
@@ -32,14 +33,21 @@ var serializeToJson = getSerializer({
     graph: g
 });
 
-serializeToJson(function(line){ p.addChunk(line); })
-    .then(function() {
-        return p.finalize();
-    }).then(function(parsedGraph) {
-        var serializeToNT = getSerializer({
-            contentType: 'application/n-triples',
-            graph: parsedGraph
-        });
-        return serializeToNT(function(line) { console.log(line); });
-    }).done();
-
+serializeToJson(function (line){
+    "use strict";
+    p.addChunk(line);
+}).then(function() {
+    "use strict";
+    var prom = p.finalize();
+    prom.then(function(dataset) {
+        console.log(dataset);
+    });
+    return prom;
+}).then(function(parsedGraph) {
+    "use strict";
+    var serializeToNT = getSerializer({
+        contentType: 'application/n-triples',
+        graph: parsedGraph
+    });
+    return serializeToNT(function(line) { console.log(line); });
+});
