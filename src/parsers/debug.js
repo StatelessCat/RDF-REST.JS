@@ -4,7 +4,10 @@ var assert = require('assert');
 var Promise = require('promise');
 
 var Parser = function(graph) {
-    if (!(this instanceof Parser)) return new Parser(graph);
+    "use strict";
+    if (!(this instanceof Parser)) {
+        return new Parser(graph);
+    }
 
     var that = this;
     var _txt = "";

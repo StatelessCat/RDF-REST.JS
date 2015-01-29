@@ -19,7 +19,7 @@ var me = iri('http://champin.net/#pa');
 var ns = namespace('http://ex.co/vocab#');
 var g = graph();
 g.addTriple(me, ns('type'), ns('Person'));
-g.addTriple(me, ns('label'), "Pierre-Antoine Champin"); 
+g.addTriple(me, ns('label'), "Pierre-Antoine Champin");
 
 /******** serialize graph as debug+json, parse it back, and serialize it to NT ********/
 
@@ -32,14 +32,18 @@ var serializeToJson = getSerializer({
     graph: g
 });
 
-serializeToJson(function(line){ p.addChunk(line); })
-    .then(function() {
-        return p.finalize();
-    }).then(function(parsedGraph) {
-        var serializeToNT = getSerializer({
-            contentType: 'application/n-triples',
-            graph: parsedGraph
-        });
-        return serializeToNT(function(line) { console.log(line); });
-    }).done();
+serializeToJson(function(line){
+    "use strict";
+    p.addChunk(line);
+}).then(function() {
+    "use strict";
+    return p.finalize();
+}).then(function(parsedGraph) {
+    "use strict";
+    var serializeToNT = getSerializer({
+        contentType: 'application/n-triples',
+        graph: parsedGraph
+    });
+    return serializeToNT(function(line) { console.log(line); });
+}).done();
 
