@@ -6,18 +6,22 @@ var iri = require('../src/rdfnode.js').iri;
 var namespace = require('../src/rdfnode.js').namespace;
 var nt = require('../src/serializers/nt.js').nt;
 
+require('../src/parsers/debug.js'); // ensures that parser is registered
+require('../src/serializers/jsonld.js'); // ensures that serializer is registered
+
+
 var me = iri('http://champin.net/#pa');
 var ns = namespace('http://ex.co/vocab#');
 
-var bc = getCore(me);
+var resource = getCore('http://localhost:12345/');
 
-bc.getState().then(function(g) {
+resource.getState().then(function(g) {
     return nt(g, console.log);
 }).then(function() {
-    return bc.edit(function(g) {
+    return resource.edit(function(g) {
         return g.addTriple(me, ns('type'), ns('Person'))
             .then(function() {
-                bc.edit(function(g2) {
+                resource.edit(function(g2) {
                     return g2.addTriple(me, ns('label'), "Pierre-Antoine Champin");
                 });
             });
@@ -27,7 +31,7 @@ bc.getState().then(function(g) {
     return nt(g, console.log);
 }).then(function() {
     console.log('---- \n');
-    return bc.getState();
+    return resource.getState();
 }).then(function(g) {
     return nt(g, console.log);
 }).done();

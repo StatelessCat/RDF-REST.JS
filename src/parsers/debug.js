@@ -15,31 +15,32 @@ var Parser = function(graph) {
         _txt += chunk;
     };
     that.finalize = function() {
-        return new Promise(function(resolve, reject) {
-            var json = JSON.parse(_txt);
-            assert(json.length !== undefined);
-            json.forEach(function(triple) {
-                if (triple['@id'] === undefined) return;
-                var s, p, o;
-                s = { '@id': triple['@id'] };
-                for (var k in triple) {
-                    if (k !== '@id') {
-                        p = { '@id': k };
-                        o = triple[k];
-                        if (o['@language'] !== undefined) {
-                            o['@type'] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString";
-                        }
+        var json = JSON.parse(_txt);
+        assert(json.length !== undefined);
+        var promises = [];
+        json.forEach(function(triple) {
+            if (triple['@id'] === undefined) return;
+            var s, p, o;
+            s = { '@id': triple['@id'] };
+            for (var k in triple) {
+                if (k !== '@id') {
+                    p = { '@id': k };
+                    o = triple[k];
+                    if (o['@language'] !== undefined) {
+                        o['@type'] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString";
                     }
                 }
-                if (!(p && o)) {
-                    throw "invalid triple structure " + triple
-                }
-                graph.addTriple(s, p, o);
-            });
-            resolve(graph);
+            }
+            if (!(p && o)) {
+                throw "invalid triple structure " + triple;
+            }
+            promises.push(graph.addTriple(s, p, o));
         });
+        return Promise.all(promises)
+            .then(function() { return graph; });
     };
 };
+
 exports.Parser = Parser;
 
 require('./factory.js').register({

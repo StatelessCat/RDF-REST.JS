@@ -8,6 +8,9 @@ exports.register = function(args) {
 
 exports.getParser = function(args) {
     var parserMaker = _REGISTRY[args.contentType];
+    if (!parserMaker) {
+        throw "Could not find parser for " + JSON.stringify(args);
+    }
     return parserMaker(args.graph);
 };
 

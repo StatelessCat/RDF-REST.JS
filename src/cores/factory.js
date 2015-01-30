@@ -9,7 +9,7 @@ exports.register = function(iriPrefix, subfactory) {
        stability: 2
     */
 
-    // TODO sort prefixes in increasing size order
+    // TODO sort prefixes in decreasing size order
     // (to ensure priorities)
     _REGISTRY.push({
         iriPrefix: iriPrefix,
@@ -41,7 +41,7 @@ exports.getCore = function(iri) {
 var BasicCore = require('./basic.js').BasicCore;
 var graph = require('../graph.js').graph;
 var makeIri = require('../rdfnode.js').iri;
-exports.register("http://", function(iri) {
+exports.register("http://champin.net", function(iri) {
     var g = graph();
     g.addTriple(makeIri(iri),
                 makeIri('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
@@ -49,3 +49,8 @@ exports.register("http://", function(iri) {
                );
     return new BasicCore(iri, g);
 });
+
+
+var HttpCore = require('./http.js').HttpCore;
+exports.register("http://", HttpCore);
+

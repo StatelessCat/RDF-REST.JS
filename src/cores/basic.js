@@ -14,6 +14,9 @@ var BasicCore = function(iri, graph) {
     that.iri = iri;
     that._graph = graph;
 
+    var _editDepth = 0;
+    var _editableGraph;
+
     that.getState = function(forceRefresh) {
         /** 
             Promises an RDF graph representing the current state of the core.
@@ -25,17 +28,38 @@ var BasicCore = function(iri, graph) {
         return Promise.resolve(readonlyWrapper(graph));
     };
 
-    that.edit = function(editor) {
+    that.edit = function(editor, forceRefresh) {
         /**
            Promises to apply function 'editor' to the current state of the core,
            and to return the resulting state.
-           
+
            stability: 3
         */
-        return Promise.resolve(editor(graph))
-            .then(function() {
-                return graph;
-            });
+        var p;
+        _editDepth += 1;
+        if (_editDepth === 1) {
+            //console.log('---', 'copying graph');
+            p = copyGraph(graph)
+                .then(function(copiedGraph) {
+                    _editableGraph = copiedGraph;
+                    return editor(_editableGraph);
+                })
+                .then(function() {
+                    //console.log('---', 'commiting _editableGraph');
+                    return copyGraph(_editableGraph, graph);
+                });
+        } else {
+            //console.log('---', 'reusing _editableGraph');
+            p = Promise.resolve(_editableGraph)
+                .then(
+                    editor
+                );
+        }
+        p.then(function() {
+            _editDepth -= 1;
+            if (_editDepth === 0) _editableGraph = null;
+        });
+        return p;
     };
 
     that.postGraph = function(graph) {

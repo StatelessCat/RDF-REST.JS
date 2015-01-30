@@ -1,5 +1,7 @@
 // jshint node: true
 
+var Promise = require('promise');
+
 var graph = require('../src/graph.js').graph;
 var bnode = require('../src/rdfnode.js').bnode;
 var canonicalize = require('../src/rdfnode.js').canonicalize;
@@ -37,19 +39,28 @@ var name = canonicalize("Pierre-Antoine Champin");
 // ******** Graph ********
 
 var g = graph();
-g.addTriple(me, type, Person);
-g.addTriple(me, label, name); 
-g.addTriple(Person, label, labelP);
+var prom = Promise.all([
+    g.addTriple(me, type, Person),
+    g.addTriple(me, label, name),
+     g.addTriple(Person, label, labelP),
 
-// nb the 3rd argument of addTriple is automatically canonicalized,
-// so the following is also possible
-g.addTriple(me, label, "pchampin"); 
+     // nb the 3rd argument of addTriple is automatically canonicalized,
+     // so the following is also possible
+     g.addTriple(me, label, "pchampin"),
+ ]);
+
 
 // ******** Serialize ********
-var nt = require('../src/serializers/nt.js').nt;
-nt(g, function(line) { console.log(line); }).done();
 
-console.log('\n\n');
+ prom = prom
+    .then(function() {
+        var nt = require('../src/serializers/nt.js').nt;
+        return nt(g, function(line) { console.log(line); });
+    })
+    .then(function() {
+        console.log('\n\n');
+        var jsonld = require('../src/serializers/jsonld.js').jsonld;
+        return jsonld(g, function(line) { console.log(line); });
+    })
+    .done();
 
-var jsonld = require('../src/serializers/jsonld.js').jsonld;
-jsonld(g, function(line) { console.log(line); }).done();
