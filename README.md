@@ -2,7 +2,7 @@ Welcome to simple-rdf.
 # Overview
 simple-rdf is a simple in-memory RDF store for JS.
 
-# Use case 1
+# Use case 1 - [Look the source code](https://github.com/StatelessCat/simple-rdf.js/blob/master/examples/usecase1.js)
 You want to create an in-memory RDF Graph Representation from a Json-LD document.
 
 Requiring the parser:
