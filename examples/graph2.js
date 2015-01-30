@@ -40,11 +40,11 @@ serializeToJson(function(line){
     return p.finalize();
 }).then(function(parsedGraph) {
     "use strict";
-    parsedGraph.forEachTriple(null, null, null, console.log);
     var serializeToNT = getSerializer({
         contentType: 'application/n-triples',
         graph: parsedGraph
     });
+    parsedGraph.forEachTriple(null, null, null, console.log);
     return serializeToNT(function(line) {
         console.log(line); });
 }).done();

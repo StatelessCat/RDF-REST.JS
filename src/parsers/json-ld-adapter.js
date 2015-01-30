@@ -25,8 +25,24 @@ var Parser = function(graph) {
             jsonLdPro.toRDF(_txt).then(function (dataset) {
                 var resultArr = dataset["@default"];
                 resultArr.forEach(function (triple) {
-                    graph.addTriple(iri(triple.subject.value),
-                        iri(triple.predicate.value), triple.object);
+                    if ( ((/string/).test(triple.object.datatype)) &&
+                        ((/literal/).test(triple.object.type)) ) {
+                        // TODO unsafe checking ?
+
+                        // the object of the triple is a literal of type string,
+                        // we use the automatic canonicalisation of graph.js:
+                        graph.addTriple(
+                            iri(triple.subject.value),
+                            iri(triple.predicate.value),
+                            triple.object.value);
+                        // TODO explicitly using canonicalize ?
+
+                    } else {
+                        graph.addTriple(
+                            iri(triple.subject.value),
+                            iri(triple.predicate.value),
+                            iri(triple.object.value));
+                    } // TODO maybe a condition is missing here
                 });
                 if (graph) {
                     resolve(graph);
