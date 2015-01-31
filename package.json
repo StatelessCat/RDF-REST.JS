@@ -19,6 +19,8 @@
     "url": "https://github.com/pchampin/simple-rdf.js/issues"
   },
   "dependencies": {
+    "jsonld": "^0.3.19",
+    "n3": "^0.4.1",
     "promise": "^6.1.0"
   }
 }
