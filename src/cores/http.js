@@ -74,7 +74,7 @@ var HttpCore = function(iri) {
                         contentType:'application/debug+json',
                         graph: _graph
                     });
-                    res.setEncoding('utf8');
+                    //res.setEncoding('utf8');
                     res.on('data', function (chunk) {
                         p.addChunk(chunk);
                     });
