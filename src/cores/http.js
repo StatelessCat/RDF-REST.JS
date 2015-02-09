@@ -56,7 +56,7 @@ var HttpCore = function(iri) {
                     // TODO generate accept header based on registered parsers?
                 }
             };
-           if (!forceRefresh && _etag) {
+            if (!forceRefresh && _etag) {
                 options.headers['if-none-match'] = _etag;
             }
             var req = _request(options, function(res) {
@@ -71,7 +71,7 @@ var HttpCore = function(iri) {
                     }
                     _graph = graph();
                     var p = getParser({
-                        contentType:'application/debug+json',
+                        contentType:'application/ld+json',
                         graph: _graph
                     });
                     //res.setEncoding('utf8');
@@ -79,7 +79,7 @@ var HttpCore = function(iri) {
                         p.addChunk(chunk);
                     });
                     res.on('end', function() {
-                        p.finalize().then(resolve(_graph));
+                        p.finalize().then(resolve);
                     });
                 } else {
                     reject("Unsupported statusCode " + res.statusCode);
@@ -155,7 +155,7 @@ var HttpCore = function(iri) {
                                 (Date.now() + Number(match[1])*1000) : undefined;
                             _graph = graph();
                             var p = getParser({
-                                contentType:'application/debug+json',
+                                contentType:'application/ld+json',
                                 graph: _graph
                             });
                             res.setEncoding('utf8');

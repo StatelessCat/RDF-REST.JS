@@ -6,7 +6,7 @@ var iri = require('../src/rdfnode.js').iri;
 var namespace = require('../src/rdfnode.js').namespace;
 var nt = require('../src/serializers/nt.js').nt;
 
-require('../src/parsers/debug.js'); // ensures that parser is registered
+require('../src/parsers/json-ld-adapter'); // ensures that parser is registered
 require('../src/serializers/jsonld.js'); // ensures that serializer is registered
 
 
