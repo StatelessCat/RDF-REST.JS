@@ -1,6 +1,6 @@
 {
-  "name": "simple-rdf.js",
-  "version": "0.0.0",
+  "name": "rdf-rest-js",
+  "version": "0.9.0",
   "description": "A simple interface and implementation for RDF graphs",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pchampin/simple-rdf.js"
+    "url": "https://github.com/StatelessCat/RDF-REST.JS.git"
   },
   "keywords": [
     "rdf"
@@ -20,7 +20,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pchampin/simple-rdf.js/issues"
+    "url": "https://github.com/StatelessCat/RDF-REST.JS/issues"
   },
   "dependencies": {
     "jsonld": "^0.3.19",
