@@ -79,7 +79,9 @@ var HttpCore = function(iri) {
                         p.addChunk(chunk);
                     });
                     res.on('end', function() {
-                        p.finalize().then(resolve);
+                        p.finalize().then(function() {
+                            resolve(_graph);
+                        })
                     });
                 } else {
                     reject("Unsupported statusCode " + res.statusCode);
