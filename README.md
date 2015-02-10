@@ -1,6 +1,22 @@
-Welcome to simple-rdf.
+Welcome to rdf-rest-js.
 # Overview
-simple-rdf is a simple in-memory RDF store for JS.
+rdf-rest-js
+
+# Requiring jsonld.js:
+
+## Browser (AMD) + bower
+
+```
+bower install rdf-rest-js
+```
+
+In Progress...
+
+## node.js + npm (Not yet available)
+
+```
+npm install ...
+```
 
 # Use case 1 - [Look the source code](https://github.com/StatelessCat/simple-rdf.js/blob/master/examples/usecase1.js)
 You want to create an in-memory RDF Graph Representation from a Json-LD document.
