@@ -165,7 +165,7 @@ var HttpCore = function(iri) {
                                 p.addChunk(chunk);
                             });
                             res.on('end', function() {
-                                p.finalize().then(resolve(readonlyWrapper(_graph)));
+                                p.finalize().then(function() {resolve(readonlyWrapper(_graph))});
                             });
                         } else {
                             reject("Unsupported statusCode " + res.statusCode);
