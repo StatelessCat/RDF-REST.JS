@@ -1,12 +1,15 @@
+// jshint node: true
+/*eslint-env node*/
+
 "use strict";
 
-var graph = require('../src/graph.js').graph;
-var getParser = require('../src/parsers/factory.js').getParser;
+var graph = require("../src/graph.js").graph;
+var getParser = require("../src/parsers/factory.js").getParser;
 
-require('../src/parsers/json-ld-adapter'); // ensures that parser is registered
+require("../src/parsers/json-ld-adapter"); // ensures that parser is registered
 
 var parser = getParser({
-    contentType:'application/ld+json',
+    contentType: "application/ld+json",
     graph: graph()
 });
 

@@ -1,10 +1,11 @@
-// jshint node: true
+/*eslint-env node*/
 
-var graph = require('../src/graph.js').graph;
-var namespace = require('../src/rdfnode.js').namespace;
+"use strict";
 
-var ns = namespace('http://ex.co/');
+var graph = require("../src/graph.js").graph;
+var namespace = require("../src/rdfnode.js").namespace;
 
+var ns = namespace("http://ex.co/");
 var g = graph();
 
 function displayP(prom) {
@@ -22,68 +23,63 @@ function addTripleAndDisplayCount(g, s, p, o) {
             return g.countTriples();
         })
         .then(
-            g.countTriples
-        )
+        g.countTriples
+    )
         .then(function(count) {
-            console.log('%j triples', count);
+            console.log("%j triples", count);
         })
-    ;
+        ;
 }
 
 function throwErr(err) { console.error(err); throw err; }
 
 g.countTriples()
     .then(function(count) {
-        console.log('%j triples', count);
+        console.log("%j triples", count);
     }, throwErr)
     .then(function() {
-        return addTripleAndDisplayCount(g, ns('s1'), ns('p'), ns('o1'));
+        return addTripleAndDisplayCount(g, ns("s1"), ns("p"), ns("o1"));
     })
     .then(function() {
-        return addTripleAndDisplayCount(g,ns('s1'), ns('p'), ns('o2'));
+        return addTripleAndDisplayCount(g, ns("s1"), ns("p"), ns("o2"));
     })
     .then(function() {
-        return addTripleAndDisplayCount(g,ns('s2'), ns('p'), ns('o1'));
+        return addTripleAndDisplayCount(g, ns("s2"), ns("p"), ns("o1"));
     })
     .then(function() {
-        return addTripleAndDisplayCount(g,ns('s3'), ns('q'), ns('o3'));
+        return addTripleAndDisplayCount(g, ns("s3"), ns("q"), ns("o3"));
     })
     .then(function() {
-        return addTripleAndDisplayCount(g,ns('s1'), ns('p'), "hello world");
+        return addTripleAndDisplayCount(g, ns("s1"), ns("p"), "hello world");
     })
-
-
     .then(function() {
         return displayP(
-            g.containsTriple(ns('s1'), ns('p'), ns('o1'))
+            g.containsTriple(ns("s1"), ns("p"), ns("o1"))
         );
     })
     .then(function() {
         return displayP(
-            g.containsTriple(ns('s1'), ns('q'), ns('o1'))
+            g.containsTriple(ns("s1"), ns("q"), ns("o1"))
         );
     })
-
     .then(function() {
         var count = 0;
         var prom = g.forEachTriple(null, null, null, function(s, p, o) {
             console.log(s, p, o);
             count += 1;
-        })
-            .then(function() {
-                console.log('printed %j triple(s)', count);
-            });
+        }).then(function() {
+            console.log("printed %j triple(s)", count);
+        });
         return prom;
     })
     .then(function() {
         var count = 0;
-        var prom = g.forEachTriple(ns('s1'), null, null, function(s, p, o) {
+        var prom = g.forEachTriple(ns("s1"), null, null, function(s, p, o) {
             g.removeTriple(s, p, o);
             count += 1;
-        })
-            .then(function() {
-                console.log('removed %j triple(s)', count);
-            });
+        }).then(function() {
+            console.log("removed %j triple(s)", count);
+        });
         return prom;
     })
     .then(function() {
@@ -96,10 +92,9 @@ g.countTriples()
         var prom = g.forEachTriple(null, null, null, function(s, p, o) {
             g.removeTriple(s, p, o);
             count += 1;
-        })
-            .then(function() {
-                console.log('removed %j triples', count);
-            });
+        }).then(function() {
+            console.log("removed %j triples", count);
+        });
         return prom;
     })
     .then(function() {

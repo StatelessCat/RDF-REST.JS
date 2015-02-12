@@ -1,4 +1,4 @@
-/*eslint-env amd, node*/
+/*eslint-env node*/
 
 var getCore = require("../src/cores/factory.js").getCore;
 
