@@ -1,6 +1,6 @@
 {
   "name": "rdf-rest-js",
-  "version": "0.9.0",
+  "version": "0.9.3",
   "description": "A simple interface and implementation for RDF graphs",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "rdf"
   ],
   "author": "Pierre-Antoine Champin <http://champin.net>",
-  "contributors" : [
+  "contributors": [
     "Pierre-Antoine Champin <http://champin.net>",
     "Raphael Cazenave-Leveque <raphael.cazenave@gmail.com>"
   ],
@@ -23,7 +23,7 @@
     "url": "https://github.com/StatelessCat/RDF-REST.JS/issues"
   },
   "dependencies": {
-    "jsonld": "^0.3.19",
+    "jsonld": "^0.3.22",
     "n3": "^0.4.1",
     "promise": "^6.1.0"
   }

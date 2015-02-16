@@ -1,5 +1,11 @@
 /*eslint-env node*/
 
+// This example need http Core
+// We comment the two lines that register the Http Core for ensure browser compat
+// We can still use this example, just uncomment the last two lines of factory.js,
+//   but it will break the browser compat
+// TODO, we need to figure a rule to do browserification of the lib without the HTTP Core (it make sense)
+
 "use strict";
 
 var getCore = require("../src/cores/factory.js").getCore;

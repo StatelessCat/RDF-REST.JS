@@ -2,20 +2,45 @@ Welcome to rdf-rest-js.
 # Overview
 rdf-rest-js
 
-# Requiring jsonld.js:
+Now a browserified version is available, it's browserified/rdfrest-bundle.js
 
-## Browser (AMD) + bower
+# Using rdf-rest-js:
+
+We are using browserify to bundle this lib and his dependencies into one rdfrest-bundle.js that expose both AMD and CommonJS.
+Here is the command we uses for creating the bundle:
+
+```bash
+browserify src/rdf-rest-lib.js --standalone rdfrestjs > browserified/rdfrest-bundle.js
+```
+
+## Via AMD, for browsers, using bower to get the lib, and RequireJS to load it (or any AMD compliant loader)
+
+```js
+require.config({
+    paths: {
+        rdfrestjs: "bower_components/rdf-rest-js/browserified/rdfrest-bundle"
+    }
+});
+
+define(["rdfrestjs"], function(rdfrestjs) {
+    "use strict";
+
+    // use rdfrestjs via his factories
+    // the actual interface is in src/rdf-rest-lib.js
+
+});
+
 
 ```
-bower install rdf-rest-js
-```
 
-In Progress...
-
-## node.js + npm (Not yet available)
+## Via CommonJs, for Node.js, using npm (Not yet available)
 
 ```
-npm install ...
+npm install rdf-rest-js
+```
+
+```js
+Not yet available
 ```
 
 # Use case 1 - [Look the source code](https://github.com/StatelessCat/simple-rdf.js/blob/master/examples/usecase1.js)
