@@ -1,8 +1,8 @@
 {
-  "name": "rdf-rest-js",
-  "version": "0.9.3",
+  "name": "rdfrest",
+  "version": "0.9.4",
   "description": "A simple interface and implementation for RDF graphs",
-  "main": "index.js",
+  "main": "./src/rdf-rest-lib.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,5 +26,14 @@
     "jsonld": "^0.3.22",
     "n3": "^0.4.1",
     "promise": "^6.1.0"
-  }
+  },
+  "homepage": "https://github.com/StatelessCat/RDF-REST.JS",
+  "directories": {
+    "example": "examples",
+    "test": "test",
+    "src": "src",
+    "browserified": "browserified"
+  },
+  "browser": "./browserified/rdfrest-bundle.js",
+  "devDependencies": {}
 }

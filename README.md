@@ -15,6 +15,10 @@ browserify src/rdf-rest-lib.js --standalone rdfrestjs > browserified/rdfrest-bun
 
 ## Via AMD, for browsers, using bower to get the lib, and RequireJS to load it (or any AMD compliant loader)
 
+```
+bower install rdfrestjs
+```
+
 ```js
 require.config({
     paths: {
@@ -33,14 +37,52 @@ define(["rdfrestjs"], function(rdfrestjs) {
 
 ```
 
-## Via CommonJs, for Node.js, using npm (Not yet available)
+## Via CommonJs, for Node.js, using npm
 
 ```
-npm install rdf-rest-js
+npm install rdfrest
 ```
 
 ```js
-Not yet available
+var rdfrest = require("rdfrest");
+
+// inform the Core factory of a ressource
+var BasicCore = rdfrest.coreBasic.BasicCore;
+var graph = rdfrest.graph.graph;
+var makeIri = rdfrest.rdfNode.iri;
+rdfrest.coreFactory.register("http://ex.co", function(uri) {
+    var g = graph();
+    g.addTriple(makeIri(uri),
+        makeIri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+        makeIri("http://www.w3.org/1999/02/22-rdf-syntax-ns#Resource")
+    );
+    g.addTriple(makeIri(uri),
+        makeIri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+        makeIri("http://schema.org/Person")
+    );
+    return new BasicCore(uri, g);
+});
+
+// Get the corresponding Core
+var getCore = rdfrest.coreFactory.getCore;
+var iri = rdfrest.rdfNode.iri;
+var namespace = rdfrest.rdfNode.namespace;
+var nt = rdfrest.serializerNTriples.nt;
+
+var john = iri("http://ex.co/JohnLennon");
+var ns = namespace("http://schema.org/");
+var bc = getCore(john);
+
+bc.getState().then(function(g) {
+    return nt(g, console.log);
+}).then(function() {
+    return bc.edit(function(g) {
+        return g.addTriple(john, ns("name"), "John Lennon");
+    });
+}).then(function(g) {
+    console.log("----\n");
+    return nt(g, console.log);
+});
 ```
 
 # Use case 1 - [Look the source code](https://github.com/StatelessCat/simple-rdf.js/blob/master/examples/usecase1.js)

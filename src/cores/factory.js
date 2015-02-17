@@ -43,9 +43,12 @@ exports.getCore = function(iri) {
 };
 
 // TODO remove this; this is for debug only
+
+/*
 var BasicCore = require("./basic.js").BasicCore;
 var graph = require("../graph.js").graph;
 var makeIri = require("../rdfnode.js").iri;
+
 exports.register("http://champin.net", function(iri) {
     var g = graph();
     g.addTriple(makeIri(iri),
@@ -54,6 +57,7 @@ exports.register("http://champin.net", function(iri) {
                );
     return new BasicCore(iri, g);
 });
+*/
 
 // var HttpCore = require("./http.js").HttpCore;   // We cannot use this one anymore to ensure the browser compat
 // exports.register("http://", HttpCore);
