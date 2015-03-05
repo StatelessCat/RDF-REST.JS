@@ -1,6 +1,6 @@
 {
   "name": "rdfrestjs",
-  "version": "0.9.4",
+  "version": "1.0.0",
   "homepage": "https://github.com/StatelessCat/RDF-REST.JS",
   "authors": [
     "Pierre-Antoine Champin <http://champin.net>",

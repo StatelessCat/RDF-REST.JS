@@ -1,6 +1,6 @@
 {
   "name": "rdfrest",
-  "version": "0.9.4",
+  "version": "1.0.0",
   "description": "A simple interface and implementation for RDF graphs",
   "main": "./src/rdf-rest-lib.js",
   "scripts": {
@@ -34,6 +34,5 @@
     "src": "src",
     "browserified": "browserified"
   },
-  "browser": "./browserified/rdfrest-bundle.js",
   "devDependencies": {}
 }
